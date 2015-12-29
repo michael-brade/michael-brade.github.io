@@ -51,14 +51,11 @@ var supported = {
  * Build
  */
 metalsmith(__dirname)
-    // The main website contents
     .source(config.contentRoot)
-    // Build to .tmp
-    .destination('.tmp')
+    .destination(config.devRoot)
+
     // Process metadata
     .metadata(metadata)
-
-    // TODO: how to read style files in styles instead of contentRoot/[scss,styles]???
 
     // Process css
     .use(duo({ entry: ['css/index.css'] }))
@@ -79,7 +76,12 @@ metalsmith(__dirname)
 
     // Process templates and content
     .use(drafts())
-    .use(markdown({ gfm: true }))
+    .use(markdown({
+        smartypants: true,
+        smartLists: true,
+        gfm: true,
+        tables: true
+    }))
 
     // .use(permalinks())
     // .use(collections())
@@ -105,7 +107,7 @@ metalsmith(__dirname)
         online: false,
         open: false,
         server: '.tmp',
-        files: ['content/**/*.md', 'templates/**/*.hbs', 'styles/**/*']
+        files: [ config.contentRoot + '/**/*.md', config.layoutRoot + '/**/*.hbs', config.styleRoot + '/**/*']
     }))
 
     // Build site
