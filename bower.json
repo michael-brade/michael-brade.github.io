@@ -1,0 +1,16 @@
+{
+    "name": "mbrade-homepage",
+    "description": "My personal website.",
+    "authors": [
+        "Michael Brade"
+    ],
+
+    "main": "build.js",
+
+    "dependencies": {
+        "bootstrap": "4.x"
+    },
+
+    "license": "MIT",
+    "private": true
+}
