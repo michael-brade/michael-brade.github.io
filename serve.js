@@ -3,18 +3,19 @@
  */
 var metalsmith = require('metalsmith');
 
-var branch = require('metalsmith-branch');
+//var branch = require('metalsmith-branch');
 var duo = require('metalsmith-duo');
-var fingerprint = require('metalsmith-fingerprint');
-var ignore = require('metalsmith-ignore');
 
+// contents
 var drafts = require('metalsmith-drafts');
 var markdown = require('metalsmith-markdown');
 var layouts = require('metalsmith-layouts');
 
+// assets & files
+var assets = require('metalsmith-assets');
+var fingerprint = require('metalsmith-fingerprint');
+var ignore = require('metalsmith-ignore');
 var rename = require('metalsmith-rename');
-var browserSync = require('metalsmith-browser-sync');
-
 
 // CSS
 var sass = require('metalsmith-sass');
@@ -23,6 +24,8 @@ var postcss = require('metalsmith-postcss');
 var customMedia = require('postcss-custom-media');
 var customProperties = require('postcss-custom-properties');
 var calc = require('postcss-calc');
+
+var browserSync = require('metalsmith-browser-sync');
 
 
 /**
@@ -99,7 +102,15 @@ metalsmith(__dirname)
     //     [/\.hbs$/, '.html']
     // ]))
 
-    // .use(assets())
+    .use(assets({
+        source: './bower_components/bootstrap-sass/assets/fonts',       // relative to the working directory
+        destination: './fonts'                                          // relative to the build directory
+    }))
+    .use(assets({
+        source: './bower_components/font-awesome-sass/assets/fonts',    // relative to the working directory
+        destination: './fonts'                                          // relative to the build directory
+    }))
+
     // .use(minify())
 
     // Serve and watch for changes

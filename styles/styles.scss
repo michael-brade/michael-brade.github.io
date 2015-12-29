@@ -1,0 +1,87 @@
+// Import Bootstrap Compass integration
+@import 'bootstrap-compass';
+
+// Import custom Bootstrap variables
+@import 'bootstrap-variables';
+
+// Import Bootstrap for Sass
+@import 'bootstrap';
+
+// Font Awesome
+@import 'font-awesome-compass';
+@import 'font-awesome';
+
+
+.navbar {
+    @include box-shadow(0 0 10px 5px rgba($brand-secondary, .5));
+
+    .navbar-brand {
+        padding: 5px;
+
+        > img {
+            display: inline;
+        }
+    }
+
+    img {
+        &.sambodha-logo,
+        &.sambodha-text {
+            height: 100%;
+        }
+
+        &.sambodha-logo {
+            padding-right: 5px;
+        }
+    }
+}
+
+
+.jumbotron {
+    .container &,
+    .container-fluid & {
+        padding-right: ($jumbotron-padding / 2);
+        padding-left: ($jumbotron-padding / 2);
+    }
+}
+
+
+// utils
+
+.no-text-selection {
+    @include user-select(none);
+}
+
+// icons
+
+.fa-remove {
+    margin-left: 3px;
+
+    &:hover {
+        @extend .fa-times-circle;
+        @extend .fa-lg;
+        margin-left: 0;
+        color: $brand-danger;
+    }
+}
+
+.fa-external-link:hover {
+    @extend .fa-external-link-square;
+    vertical-align: -1px;
+    line-height: 1.15em;
+    font-size: 1.15em;
+}
+
+
+
+// rewrite url to image-url
+@import 'rewrite-url/integrations/compass';
+@import 'rewrite-url';
+
+
+legend {
+    margin-top: (1.618 * $line-height-computed);
+}
+
+.tab-content {
+    margin-top: 5px;
+}
