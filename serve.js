@@ -56,6 +56,7 @@ var supported = {
 metalsmith(__dirname)
     .source(config.contentRoot)
     .destination(config.devRoot)
+    .clean(false)
 
     // Process metadata
     .metadata(metadata)
@@ -118,10 +119,27 @@ metalsmith(__dirname)
         online: false,
         open: false,
         server: '.tmp',
-        files: [ config.contentRoot + '/**/*.md', config.layoutRoot + '/**/*.hbs', config.styleRoot + '/**/*']
+        files: [
+            config.contentRoot + '/**/*.md',
+            config.layoutRoot + '/**/*.hbs'
+        ]
     }))
 
     // Build site
     .build(function(err) {
         if (err) throw err;
+
+        var spawn = require('child_process').spawn;
+        var prc = spawn('compass', ['watch', '-e' ,'development']);
+
+        prc.stdout.setEncoding('utf8');
+        prc.stdout.on('data', function (data) {
+            var str = data.toString()
+            var lines = str.split(/(\r?\n)/g);
+            console.log(lines.join(""));
+        });
+
+        prc.on('close', function (code) {
+            console.log('compass exit code ' + code);
+        });
     });

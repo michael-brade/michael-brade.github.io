@@ -8,18 +8,19 @@
     "version": "0.1.0",
 
     "config": {
-      "contentRoot": "./content",
-      "assetRoot": "./sources",
-      "scriptRoot": "./scripts",
-      "styleRoot": "./styles",
-      "layoutRoot": "./templates",
-      "destRoot": "./build",
-      "devRoot": "./.tmp"
+      "contentRoot": "content",
+      "assetRoot":   "assets",
+      "scriptRoot":  "scripts",
+      "styleRoot":   "styles",
+      "layoutRoot":  "templates",
+      "destRoot":    "build",
+      "devRoot":     ".tmp"
     },
 
     "scripts": {
-        "clean": "rm -rf build;",
-        "build": "npm run clean; node build.js;",
+        "clean": "rm -rf build .tmp .sass-cache;",
+        "build": "npm run clean; node build.js; compass compile -e production;",
+
         "serve": "node serve.js;",
 
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +28,8 @@
 
     "devDependencies": {
         "livescript": "1.4.x",
+
+        "node-sass-css-importer": "*",
 
         "finalhandler": "^0.4.0",
         "bower-files": "^3.11.3",
